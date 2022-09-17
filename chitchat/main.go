@@ -4,6 +4,22 @@ import (
 	"net/http"
 )
 
+// Handler functions take a ResponseWriter as a param, and a pointer to a request as a the second
+func index(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"templates/layout.html",
+		"templates/navbar.html",
+		"templates/index.html",
+	}
+
+	
+	templates := template.Must(template.ParaseFiles(files...))
+
+	threads, err := data.Threads() p if err == nil {
+		templates.ExecuteTemplate(w, "layout", threads)
+	}
+}
+
 func main() {
 
 	// Making a multiplexer
