@@ -23,6 +23,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	// Making a multiplexer
+	// Basically the equivalent to a Rails router
 	mux := http.NewServeMux()
 
 	// Create handler (FileServer) to serve files
@@ -34,6 +35,22 @@ func main() {
 	// Redirect root to handler func
 	// Note: Handlers and Handler Functions are not the same
 	mux.HandleFunc("/", index)
+
+	// Other stuff that'll be explained in the next chapter
+	mux.HandleFunc("/err", err)
+
+	// User sessions
+	mux.HandleFunc("/login", login)
+	mux.HandleFunc("/logout", logout)
+	mux.HandleFunc("/signup", signup)
+	mux.HandleFunc("/signup_account", signupAccount)
+	mux.HandleFunc("/authenticate", authenticate)
+
+	// Thread CRUD
+	mux.HandleFunc("/thread/new", newThread)
+	mux.HandleFunc("/thread/create", createThread)
+	mux.HandleFunc("/thread/post", postThread)
+	mux.HandleFunc("/thread/read", readThread)
 
 	// Create server instance listening on :8080 utilizing earlier mux
 	server := &http.Server{
